@@ -465,6 +465,9 @@ func run(s *options.KubeletServer, kubeDeps *kubelet.KubeletDeps) (err error) {
 				glog.Warningf("Failed to create API Server client: %v", err)
 			}
 		} else {
+			if (s.KubeletFlags.KubeConfig.Provided()) {
+				glog.Warningf("Invalid kubeconfig: %v", err)
+			}
 			if s.RequireKubeConfig {
 				return fmt.Errorf("invalid kubeconfig: %v", err)
 			}
