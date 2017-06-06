@@ -85,6 +85,7 @@ func RegisterDeepCopies(scheme *runtime.Scheme) error {
 		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_EventSource, InType: reflect.TypeOf(&EventSource{})},
 		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_ExecAction, InType: reflect.TypeOf(&ExecAction{})},
 		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_FCVolumeSource, InType: reflect.TypeOf(&FCVolumeSource{})},
+		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_FDSVolumeSource, InType: reflect.TypeOf(&FDSVolumeSource{})},
 		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_FlexVolumeSource, InType: reflect.TypeOf(&FlexVolumeSource{})},
 		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_FlockerVolumeSource, InType: reflect.TypeOf(&FlockerVolumeSource{})},
 		conversion.GeneratedDeepCopyFunc{Fn: DeepCopy_api_GCEPersistentDiskVolumeSource, InType: reflect.TypeOf(&GCEPersistentDiskVolumeSource{})},
@@ -1095,6 +1096,15 @@ func DeepCopy_api_FCVolumeSource(in interface{}, out interface{}, c *conversion.
 			*out = new(int32)
 			**out = **in
 		}
+		return nil
+	}
+}
+
+func DeepCopy_api_FDSVolumeSource(in interface{}, out interface{}, c *conversion.Cloner) error {
+	{
+		in := in.(*FDSVolumeSource)
+		out := out.(*FDSVolumeSource)
+		*out = *in
 		return nil
 	}
 }
@@ -3500,6 +3510,11 @@ func DeepCopy_api_VolumeSource(in interface{}, out interface{}, c *conversion.Cl
 			if err := DeepCopy_api_ScaleIOVolumeSource(*in, *out, c); err != nil {
 				return err
 			}
+		}
+		if in.FDSVolume != nil {
+			in, out := &in.FDSVolume, &out.FDSVolume
+			*out = new(FDSVolumeSource)
+			**out = **in
 		}
 		return nil
 	}

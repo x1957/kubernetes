@@ -334,6 +334,8 @@ type VolumeSource struct {
 	// ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
 	// +optional
 	ScaleIO *ScaleIOVolumeSource `json:"scaleIO,omitempty" protobuf:"bytes,25,opt,name=scaleIO"`
+	// +optional
+	FDSVolume *FDSVolumeSource `json:"fdsVolume,omitempty" protobuf:"bytes,26,opt,name=fdsVolume"`
 }
 
 // PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace.
@@ -971,6 +973,12 @@ type SecretVolumeSource struct {
 	// Specify whether the Secret or it's keys must be defined
 	// +optional
 	Optional *bool `json:"optional,omitempty" protobuf:"varint,4,opt,name=optional"`
+}
+
+type FDSVolumeSource struct {
+	AKSK string `json:"aksk" protobuf:"bytes,1,opt,name=aksk"`
+	BucketName string `json:"bucketName" protobuf:"bytes,2,opt,name=bucketName"`
+	Endpoint string `json:"endpoint" protobuf:"bytes,3,opt,name=endpoint"`
 }
 
 const (

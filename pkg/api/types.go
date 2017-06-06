@@ -302,6 +302,8 @@ type VolumeSource struct {
 	// ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
 	// +optional
 	ScaleIO *ScaleIOVolumeSource
+
+	FDSVolume *FDSVolumeSource
 }
 
 // Similar to VolumeSource but meant for the administrator who creates PVs.
@@ -1160,6 +1162,12 @@ type ProjectedVolumeSource struct {
 	// mode, like fsGroup, and the result can be other mode bits set.
 	// +optional
 	DefaultMode *int32
+}
+
+type FDSVolumeSource struct {
+	AKSK string
+	BucketName string
+	Endpoint string
 }
 
 // Projection that may be projected along with other supported volume types

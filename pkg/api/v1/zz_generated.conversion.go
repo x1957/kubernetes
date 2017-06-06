@@ -129,6 +129,8 @@ func RegisterConversions(scheme *runtime.Scheme) error {
 		Convert_api_ExecAction_To_v1_ExecAction,
 		Convert_v1_FCVolumeSource_To_api_FCVolumeSource,
 		Convert_api_FCVolumeSource_To_v1_FCVolumeSource,
+		Convert_v1_FDSVolumeSource_To_api_FDSVolumeSource,
+		Convert_api_FDSVolumeSource_To_v1_FDSVolumeSource,
 		Convert_v1_FlexVolumeSource_To_api_FlexVolumeSource,
 		Convert_api_FlexVolumeSource_To_v1_FlexVolumeSource,
 		Convert_v1_FlockerVolumeSource_To_api_FlockerVolumeSource,
@@ -1496,6 +1498,28 @@ func autoConvert_api_FCVolumeSource_To_v1_FCVolumeSource(in *api.FCVolumeSource,
 
 func Convert_api_FCVolumeSource_To_v1_FCVolumeSource(in *api.FCVolumeSource, out *FCVolumeSource, s conversion.Scope) error {
 	return autoConvert_api_FCVolumeSource_To_v1_FCVolumeSource(in, out, s)
+}
+
+func autoConvert_v1_FDSVolumeSource_To_api_FDSVolumeSource(in *FDSVolumeSource, out *api.FDSVolumeSource, s conversion.Scope) error {
+	out.AKSK = in.AKSK
+	out.BucketName = in.BucketName
+	out.Endpoint = in.Endpoint
+	return nil
+}
+
+func Convert_v1_FDSVolumeSource_To_api_FDSVolumeSource(in *FDSVolumeSource, out *api.FDSVolumeSource, s conversion.Scope) error {
+	return autoConvert_v1_FDSVolumeSource_To_api_FDSVolumeSource(in, out, s)
+}
+
+func autoConvert_api_FDSVolumeSource_To_v1_FDSVolumeSource(in *api.FDSVolumeSource, out *FDSVolumeSource, s conversion.Scope) error {
+	out.AKSK = in.AKSK
+	out.BucketName = in.BucketName
+	out.Endpoint = in.Endpoint
+	return nil
+}
+
+func Convert_api_FDSVolumeSource_To_v1_FDSVolumeSource(in *api.FDSVolumeSource, out *FDSVolumeSource, s conversion.Scope) error {
+	return autoConvert_api_FDSVolumeSource_To_v1_FDSVolumeSource(in, out, s)
 }
 
 func autoConvert_v1_FlexVolumeSource_To_api_FlexVolumeSource(in *FlexVolumeSource, out *api.FlexVolumeSource, s conversion.Scope) error {
@@ -4616,6 +4640,7 @@ func autoConvert_v1_VolumeSource_To_api_VolumeSource(in *VolumeSource, out *api.
 	out.Projected = (*api.ProjectedVolumeSource)(unsafe.Pointer(in.Projected))
 	out.PortworxVolume = (*api.PortworxVolumeSource)(unsafe.Pointer(in.PortworxVolume))
 	out.ScaleIO = (*api.ScaleIOVolumeSource)(unsafe.Pointer(in.ScaleIO))
+	out.FDSVolume = (*api.FDSVolumeSource)(unsafe.Pointer(in.FDSVolume))
 	return nil
 }
 
@@ -4650,6 +4675,7 @@ func autoConvert_api_VolumeSource_To_v1_VolumeSource(in *api.VolumeSource, out *
 	out.Projected = (*ProjectedVolumeSource)(unsafe.Pointer(in.Projected))
 	out.PortworxVolume = (*PortworxVolumeSource)(unsafe.Pointer(in.PortworxVolume))
 	out.ScaleIO = (*ScaleIOVolumeSource)(unsafe.Pointer(in.ScaleIO))
+	out.FDSVolume = (*FDSVolumeSource)(unsafe.Pointer(in.FDSVolume))
 	return nil
 }
 
